@@ -5,12 +5,12 @@ This code was developed specifically for some calculations done for AGU 2014. Wi
 
 ## Pseudo-code idea
 
-#### Choose a density threshold
+#### 1.) Choose a density threshold
 To calculate the mixed layer depth from stratification, first choose a density threshold:
 ```% Critical density difference (kg/m^3)
 delta_rho_crit = 0.03;
 ```
-#### Calculate $\Delta\rho$
+#### 2.) Calculate $\Delta\rho$
 Next, calculate `delta_rho`, which is the difference between the surface density and the subsurface density at each grid cell. It will have a value of `0.0` in the top grid cell:
 ```% Initialize
 delta_rho = zeros(size(DRHODR));
@@ -21,7 +21,7 @@ for k=2:size(DZ,3)
                                      DZ(:,:,1:k),3);
 end
 ```
-#### Estiamte depth where $\Delta\rho$ meets the threshold criterion
+#### 3.) Estiamte depth where $\Delta\rho$ meets the threshold criterion
 Now use a "locate" function to find the grid cell wherein the density difference exceeds the threshold chosen above. Finally, use linear interpolation to estimate the depth within that grid cell where the difference exceeds the threshold.
 ```
 % Select a column indexed by (i,j)
